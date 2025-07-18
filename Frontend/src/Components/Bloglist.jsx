@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { blogCategories } from '../assets/assets'
+import { blog_data, blogCategories } from '../assets/assets'
 // import { motion } from "motion/react" i change this due to some issues in future have any so i have to shift to this
 import { motion } from "framer-motion"
+import Blogcard from './Blogcard'
 
 
 export default function Bloglist() {
-    const [menu,setMenu] = useState()
+    const [menu,setMenu] = useState("All")
   return (
     <div>
         <div className='flex justify-center gap-4 sm:gap-8 my-10 relative'>
@@ -20,8 +21,9 @@ export default function Bloglist() {
                 </div>
             ))}
         </div>
-        <div>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8 mb-24 mx-8 sm:mx-16 xl:mx-40'>
             {/* Blog cards */}
+            {blog_data.filter((blog)=>menu === "All" ? true : blog.category === menu).map((blog)=><Blogcard key={blog._id} blog={blog}/>)}
         </div>
     </div>
   )
